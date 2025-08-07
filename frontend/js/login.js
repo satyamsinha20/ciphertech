@@ -18,10 +18,10 @@ loginForm.addEventListener("submit", async (e) => {
     const data = await res.json();
 
     if (res.ok && data.token) {
-      const expiry = new Date().getTime() + 5 * 60 * 1000; // 5 minutes
+      const expiry = new Date().getTime() + 10 * 60 * 1000; // 10 minutes
       localStorage.setItem("token", data.token);
       localStorage.setItem("tokenExpiry", expiry);
-      window.location.href = "/admin/dashboard.html";
+      window.location.href = "dashboard.html";
     } else {
       alert(data.error || "Login failed");
     }

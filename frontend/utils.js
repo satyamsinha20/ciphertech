@@ -1,33 +1,41 @@
-// utils.js
+// common.js
 
-// ✅ Check if user is logged in and session is valid
-function isLoggedIn() {
+// Redirect to login if not logged in or token expired
+function requireLogin() {
   const token = localStorage.getItem("token");
   const expiry = localStorage.getItem("tokenExpiry");
-  return token && expiry && new Date().getTime() < parseInt(expiry);
-}
 
-// ✅ Enforce login session or redirect
-function requireLogin() {
-  if (!isLoggedIn()) {
+  if (!token || !expiry || Date.now() > parseInt(expiry)) {
     localStorage.clear();
     window.location.href = "login.html";
   }
 }
 
-// ✅ Auto logout after inactivity
-function autoLogout(minutes = 5) {
-  setTimeout(() => {
+// Auto logout after 10 minutes
+function autoLogout() {
+  const expiry = localStorage.getItem("tokenExpiry");
+
+  if (expiry && Date.now() > parseInt(expiry)) {
     localStorage.clear();
+    alert("Session expired. Please log in again.");
     window.location.href = "login.html";
-  }, minutes * 60 * 1000);
+  }
+
+  setInterval(() => {
+    const expiry = localStorage.getItem("tokenExpiry");
+    if (expiry && Date.now() > parseInt(expiry)) {
+      localStorage.clear();
+      alert("Session expired. Please log in again.");
+      window.location.href = "login.html";
+    }
+  }, 10000); // check every 10s
 }
 
-// ✅ Logout handler
-function setupLogoutButton(buttonId = "logoutBtn") {
-  const btn = document.getElementById(buttonId);
-  if (btn) {
-    btn.addEventListener("click", () => {
+// Logout handler
+function setupLogoutButton() {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
       localStorage.clear();
       window.location.href = "login.html";
     });

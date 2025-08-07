@@ -1,6 +1,6 @@
-requireLogin();         // Session check
-autoLogout();           // Auto logout
-setupLogoutButton();    // Logout handler
+requireLogin();
+autoLogout();
+setupLogoutButton();
 
 let approvedClients = [];
 
@@ -20,7 +20,6 @@ async function fetchApprovedClients() {
       return;
     }
 
-    // Filter approved clients
     approvedClients = data.clients.filter(c => c.status === "Approved");
     renderApprovedTable(approvedClients);
   } catch (err) {
@@ -67,7 +66,6 @@ document.getElementById("closeModal").addEventListener("click", () => {
   document.getElementById("clientModal").style.display = "none";
 });
 
-// Search
 document.getElementById("searchInput").addEventListener("input", (e) => {
   const keyword = e.target.value.toLowerCase();
   const filtered = approvedClients.filter(c =>

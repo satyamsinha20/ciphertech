@@ -1,6 +1,6 @@
-requireLogin();         // Session check
-autoLogout();           // Auto logout
-setupLogoutButton();    // Logout button handler
+requireLogin();
+autoLogout();
+setupLogoutButton();
 
 let allClients = [];
 
@@ -20,7 +20,6 @@ async function fetchSubmissions() {
       return;
     }
 
-    // Filter only pending clients
     allClients = data.clients.filter(c => c.status !== "Approved");
     renderSubmissionsTable(allClients);
   } catch (err) {
@@ -49,7 +48,34 @@ function renderSubmissionsTable(clients) {
   });
 }
 
-// View client modal
+async function approveClient(clientId) {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await fetch(`https://ciphertech-lwzq.onrender.com/api/auth/clients/${clientId}/approve`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error || "Approval failed");
+      return;
+    }
+
+    // ✅ Reload all clients after approval
+    fetchSubmissions();
+
+  } catch (err) {
+    console.error(err);
+    alert("Server error during approval");
+  }
+}
+
 function viewClient(client) {
   const modal = document.getElementById("clientModal");
   const content = document.getElementById("clientDetails");
@@ -71,37 +97,6 @@ document.getElementById("closeModal").addEventListener("click", () => {
   document.getElementById("clientModal").style.display = "none";
 });
 
-// Approve function
-async function approveClient(clientId) {
-  const token = localStorage.getItem("token");
-
-  try {
-    const res = await fetch(`https://ciphertech-lwzq.onrender.com/api/auth/clients/${clientId}/approve`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert(data.error || "Approval failed");
-      return;
-    }
-
-    // Remove approved client from current table and refresh
-    allClients = allClients.filter(client => client._id !== clientId);
-    renderSubmissionsTable(allClients);
-
-  } catch (err) {
-    console.error(err);
-    alert("Server error during approval");
-  }
-}
-
-// Search
 document.getElementById("searchInput").addEventListener("input", (e) => {
   const keyword = e.target.value.toLowerCase();
   const filtered = allClients.filter(c =>

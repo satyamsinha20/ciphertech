@@ -1,6 +1,8 @@
-requireLogin();          // 🔒 Check login session
-autoLogout();            // ⏱️ Auto logout after 10 minutes
-setupLogoutButton();     // 🔘 Logout button with id="logoutBtn"
+requireLogin();
+autoLogout();
+setupLogoutButton();
+
+let allClients = [];
 
 async function fetchClients() {
   const token = localStorage.getItem("token");
@@ -18,31 +20,28 @@ async function fetchClients() {
       return;
     }
 
-    renderClientList(data.clients);
+    allClients = data.clients;
+    renderClientList(allClients);
   } catch (err) {
     console.error(err);
     alert("Server error");
   }
 }
 
-// Renders list with numbers and icons
 function renderClientList(clients) {
-  const listContainer = document.getElementById("clientItems");
-  listContainer.innerHTML = "";
+  const container = document.getElementById("clientItems");
+  container.innerHTML = "";
 
   clients.forEach((client, index) => {
     const li = document.createElement("li");
-
     li.innerHTML = `
       <strong>${index + 1}. ${client.name}</strong> | ${client.serviceType} | Status: ${client.status || "Pending"} 
       <button onclick='viewClient(${JSON.stringify(client)})'>👁️</button>
     `;
-
-    listContainer.appendChild(li);
+    container.appendChild(li);
   });
 }
 
-// Modal handling
 function viewClient(client) {
   const modal = document.getElementById("clientModal");
   const content = document.getElementById("clientDetails");
@@ -60,12 +59,10 @@ function viewClient(client) {
   modal.style.display = "block";
 }
 
-// Close modal
 document.getElementById("closeModal").addEventListener("click", () => {
   document.getElementById("clientModal").style.display = "none";
 });
 
-// Toggle button
 document.getElementById("toggleClientsBtn").addEventListener("click", () => {
   const listDiv = document.getElementById("clientList");
   listDiv.style.display = listDiv.style.display === "none" ? "block" : "none";
