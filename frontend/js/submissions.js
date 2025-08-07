@@ -29,7 +29,7 @@ async function fetchSubmissions() {
 }
 
 function renderSubmissionsTable(clients) {
-  const tbody = document.querySelector("#submissionsTable tbody");
+  const tbody = document.querySelector("#SubmissionsTable tbody");
   tbody.innerHTML = "";
 
   clients.forEach((client, index) => {
