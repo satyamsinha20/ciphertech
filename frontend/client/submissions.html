@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Client Submissions</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <style>
+    .search-box {
+      margin-bottom: 15px;
+    }
+
+    .back-btn {
+      margin-bottom: 15px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 100px;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: auto;
+      padding: 20px;
+      width: 60%;
+      border-radius: 8px;
+    }
+
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="back-btn" onclick="window.location.href='dashboard.html'">⬅ Back to Dashboard</button>
+
+  <h2>Client Submissions</h2>
+
+  <input type="text" id="searchInput" class="search-box" placeholder="Search by name or service..." />
+
+  <table id="submissionsTable" border="1">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Service</th>
+        <th>Status</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Modal for detailed view -->
+  <div id="clientModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Client Details</h3>
+      <div id="clientDetails"></div>
+    </div>
+  </div>
+  <script src="utils.js"></script>
+  <script src="js/submissions.js"></script>
+</body>
+</html>

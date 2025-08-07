@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Approved Clients</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    #clientModal {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 25%;
+      width: 50%;
+      background: #fff;
+      border: 1px solid #333;
+      padding: 20px;
+      z-index: 1000;
+    }
+    #closeModal {
+      cursor: pointer;
+      float: right;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>Approved Clients</h2>
+  <button onclick="window.location.href='dashboard.html'">🔙 Back to Dashboard</button>
+  <button id="logoutBtn">🚪 Logout</button>
+  <input type="text" id="searchInput" placeholder="Search by name or service" />
+
+  <table id="approvedTable">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Service</th>
+        <th>Status</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Modal -->
+  <div id="clientModal">
+    <span id="closeModal">❌</span>
+    <div id="clientDetails"></div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="js/approved.js"></script>
+</body>
+</html>
