@@ -10,7 +10,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors({
-  origin: "https://ciphertech-frontend.vercel.app", // update after Vercel is deployed
+  origin: "https://ciphertech.vercel.app", // update after Vercel is deployed
   credentials: true
 }));
 app.use(express.json());
