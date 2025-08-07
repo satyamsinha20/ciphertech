@@ -6,7 +6,7 @@ async function fetchClients() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/clients", {
+    const res = await fetch("https://ciphertech-lwzq.onrender.com", {
       headers: { Authorization: `Bearer ${token}` },
     });
 
