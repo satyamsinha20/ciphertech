@@ -76,7 +76,7 @@ async function approveClient(clientId) {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch(`http://localhost:5000/api/auth/clients/${clientId}/approve`, {
+    const res = await fetch(`https://ciphertech-lwzq.onrender.com/api/auth/clients/${clientId}/approve`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

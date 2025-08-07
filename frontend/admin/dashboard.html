@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="style/main.css"/>
+  <link rel="stylesheet" href="style/main.css" />
 </head>
+
 <body>
-<h2>Admin Dashboard</h2>
-<button onclick="window.location.href='/client/submissions.html'">Client Submissions</button>
-<button onclick="window.location.href='client/approved.html'">✅ Approved Clients</button>
+  <h2>Admin Dashboard</h2>
+  <button onclick="window.location.href='/client/submissions.html'">Client Submissions</button>
+  <button onclick="window.location.href='client/approved.html'">✅ Approved Clients</button>
 
 
-<div id="clientList" style="display: none;">
-  <ol id="clientItems"></ol>
-</div>
-
-<!-- Modal for detailed view -->
-<div id="clientModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <h3>Client Details</h3>
-    <div id="clientDetails"></div>
+  <div id="clientList" style="display: none;">
+    <ol id="clientItems"></ol>
   </div>
-</div>
 
-<!-- Your logout button -->
-<button id="logoutBtn">Logout</button>
+  <!-- Modal for detailed view -->
+  <div id="clientModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Client Details</h3>
+      <div id="clientDetails"></div>
+    </div>
+  </div>
+
+  <!-- Your logout button -->
+  <button id="logoutBtn">Logout</button>
   <script src="utils.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
+
 </html>
