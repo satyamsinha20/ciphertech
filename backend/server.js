@@ -7,11 +7,11 @@ const authRoutes = require("./routes/auth");
 
 
 const app = express();
-const cors = require('cors');
+
 
 app.use(cors({
-  origin: "https://ciphertech.vercel.app", // update after Vercel is deployed
-  credentials: true
+  origin: "https://ciphertech.vercel.app",
+  credentials: true,
 }));
 app.use(express.json());
 app.use("/api/auth", authRoutes);

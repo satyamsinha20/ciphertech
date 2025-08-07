@@ -9,7 +9,7 @@ loginForm.addEventListener("submit", async (e) => {
   };
 
   try {
-    const res = await fetch("https://ciphertech-lwzq.onrender.com", {
+    const res = await fetch("https://ciphertech-lwzq.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginData),
